@@ -69,11 +69,28 @@ namespace goblin
     }
     class goblin
     {
+        public string Goblinart()
+        {
+            string goblinart = @"
+             ,      ,
+            /(.-""-.)\
+        |\  \/      \/  /|
+        | \ / =.  .= \ / |
+        \( \   o\/o   / )/
+         \_, '-/  \-' ,_/
+           /   \__/   \
+           \ \__/\__/ /
+         ___\ \|--|/ /___
+       /`    \      /    `\
+      /       '----'       \";
+            Console.WriteLine(goblinart);
+            return goblinart;
+        }
         public int Monsters(int[] stats)
         {
             Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
             Random rnd = new Random();
-            int rndnum = rnd.Next(1, 10 + 1);
+            int rndnum = rnd.Next(1, 20 + 1);
             int a = rndnum;
             return rndnum;
         }
@@ -108,11 +125,15 @@ namespace goblin
             }
             if (crit == true)
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("you attack and do " + stats[1] * 2 + " damage");
                 goblinstats[0] = goblinstats[0] - stats[1] * 2;
             }
             else
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("you attack and do " + stats[1] + " damage");
                 goblinstats[0] = goblinstats[0] - stats[1];
             }
@@ -126,6 +147,65 @@ namespace goblin
 
     class player
     {
+        public int[] Block(int[] stats,int[] goblinstats)
+        {
+            Boolean block = false;
+            for (int i = 0; i < stats[3]; i++)
+            {
+                Random rnd = new Random();
+                int rndnum = rnd.Next(1, 10 + 1);
+                int a = rndnum;
+                if (rndnum == 10)
+                {
+                    block = true;
+                }
+            }
+            if (block == true)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("goblin attacked.. you blocked and reflect " + goblinstats[1] + " damage");
+                goblinstats[0] = goblinstats[0] - goblinstats[1];
+            }
+            else
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("goblin attacked.. through your block and did " + goblinstats[1] + " damage");
+                stats[0] = stats[0] - goblinstats[1];
+            }
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine("goblin has " + goblinstats[0] + " health");
+            return stats;
+        }
+        public int Move(Boolean special, int[] stats, int[] goblinstats)
+        {
+        keuze:;
+            int move = 0;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("1. attack    2. block    3.special");
+            try
+            {
+                move = Int32.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("attack");
+                Console.ReadLine();
+                Console.Clear();
+                goto keuze;
+            }
+            Console.Clear();
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine("goblin has " + goblinstats[0] + " health");
+
+            return move;
+        }
         public Boolean Special(Boolean special)
         {
             special = false;
@@ -145,10 +225,9 @@ namespace goblin
         }
         public int lvl(int xp, int lvl, int[] stats)
         {
-            int lvlcheck = 5 * Xp.xpneed;
-            if (xp >= 5 * lvlcheck)
+            int lvlcheck = 2 * lvl;
+            if (xp >= lvlcheck)
             {
-                Xp.xpneed++;
                 lvl++;
             oops:;
                 Console.WriteLine("lvl up");
@@ -181,11 +260,15 @@ namespace goblin
             }
             if (crit == true)
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("goblin attacks and does " + goblinstats[1] * 2 + " damage");
                 stats[0] = stats[0] - goblinstats[1] * 2;
             }
             else
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("goblin attacks and does " + goblinstats[1] + " damage");
                 stats[0] = stats[0] - goblinstats[1];
             }
@@ -235,7 +318,9 @@ namespace goblin
         static void Main()
         {
             Xp.xpneed = 1;
+            int move = 0;
             int lvl = 5;
+            int lvlupcheck = 0;
             int xp = 0;
             int monsters = 0;
             Boolean area1 = true;
@@ -247,10 +332,10 @@ namespace goblin
             player n = new();
             goblin nn = new();
             world nnn = new();
-            name = n.name();
+            //name = n.name();
 
-            Console.WriteLine("hello " + name);
-            Console.ReadLine();
+            //Console.WriteLine("hello " + name);
+            //Console.ReadLine();
             int[] stats = { 0, 0, 0, 0 };
             n.Stats(stats);
             Console.WriteLine();
@@ -267,16 +352,25 @@ namespace goblin
         goblin:;
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine("goblin encounter");
+            string goblinart = nn.Goblinart();
+            Console.ReadLine();
             int[] goblinstats = nn.Goblin();
             while (goblin_alive == true)
             {
+                move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
-                    stats = n.damage(stats, goblinstats);
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        Console.WriteLine("you blocked too slow..");
+                        stats = n.damage(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -290,8 +384,13 @@ namespace goblin
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
                         xp = n.xp(xp, 5);
                         lvl = n.lvl(xp, lvl, stats);
+                        if(lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
                         defaulthealth = stats[0];
                         goto monsters;
                     }
@@ -299,8 +398,15 @@ namespace goblin
                 }
                 else
                 {
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = n.damage(stats, goblinstats);
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        stats = n.Block(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -314,8 +420,13 @@ namespace goblin
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
                         xp = n.xp(xp, 5);
                         lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
                         defaulthealth = stats[0];
                         goto monsters;
                     }
@@ -326,16 +437,23 @@ namespace goblin
             goblinstats = nn.luckyGoblin();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine("a lucky goblin showed up");
             Console.ReadLine();
             while (luckygoblin_alive == true)
             {
+                move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
-                    stats = n.damage(stats, goblinstats);
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        Console.WriteLine("you blocked too slow..");
+                        stats = n.damage(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -349,7 +467,7 @@ namespace goblin
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
-                        xp = n.xp(xp, 20);
+                        xp = n.xp(xp, 100);
                         lvl = n.lvl(xp, lvl, stats);
                         defaulthealth = stats[0];
                         goto monsters;
@@ -358,8 +476,15 @@ namespace goblin
                 }
                 else
                 {
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = n.damage(stats, goblinstats);
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        stats = n.Block(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -386,16 +511,23 @@ namespace goblin
             goblinstats = nn.goblinking();
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine();
             Console.WriteLine("goblin king showed up");
             Console.ReadLine();
             while (goblinking_alive == true)
             {
+                move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
-                    stats = n.damage(stats, goblinstats);
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        Console.WriteLine("you blocked too slow..");
+                        stats = n.damage(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -418,8 +550,15 @@ namespace goblin
                 }
                 else
                 {
-                    goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = n.damage(stats, goblinstats);
+                    if (move == 1)
+                    {
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                        stats = n.damage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        stats = n.Block(stats, goblinstats);
+                    }
                     if (stats[0] <= 0)
                     {
                         goto dead;
