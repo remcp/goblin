@@ -8,7 +8,65 @@ namespace goblin
     {
         public static int xpneed = 1;
     };
+    class world
+    {
+        public Boolean Area1(int[] stats)
+        {
+            int keuze = 0;
+            Boolean area1 = true;
+        checkinput:;
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("you find yourself in a stange room...");
+            Console.ReadLine();
+            Console.WriteLine();
+            Console.WriteLine("all you see is a door and some boxes that look empty");
+            Console.ReadLine();
+        boxes:;
+            Console.WriteLine();
+            Console.WriteLine("1. leave the room.    2. check out the boxes");
+            try
+            {
+                keuze = Int32.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("at least try choosing a number");
+                Console.ReadLine();
+                Console.Clear();
+                goto checkinput;
+            }
 
+            if (keuze == 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("you walk to the door... open it... and...");
+                Console.ReadLine();
+                Console.Clear();
+                area1 = false;
+            }
+            if (keuze == 2)
+            {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("as expected... the boxes are indeed empty...");
+            Console.ReadLine();
+            Console.Clear();
+            goto boxes;
+            }
+            
+
+            Console.Clear();
+
+
+            return area1;
+        }
+    }
     class goblin
     {
         public int Monsters(int[] stats)
@@ -27,7 +85,7 @@ namespace goblin
         }
         public int[] luckyGoblin()
         {
-            int[] statsgoblin = { 7, 1, 2, 7 };
+            int[] statsgoblin = { 7, 2, 2, 7 };
             return statsgoblin;
         }
         public int[] goblinking()
@@ -50,12 +108,12 @@ namespace goblin
             }
             if (crit == true)
             {
-                Console.WriteLine("you attacked and do " + stats[1] * 2 + " damage");
+                Console.WriteLine("you attack and do " + stats[1] * 2 + " damage");
                 goblinstats[0] = goblinstats[0] - stats[1] * 2;
             }
             else
             {
-                Console.WriteLine("you attacked and do " + stats[1] + " damage");
+                Console.WriteLine("you attack and do " + stats[1] + " damage");
                 goblinstats[0] = goblinstats[0] - stats[1];
             }
             Console.ReadLine();
@@ -87,8 +145,10 @@ namespace goblin
         }
         public int lvl(int xp, int lvl, int[] stats)
         {
-            if (xp >= 5 * Xp.xpneed)
+            int lvlcheck = 5 * Xp.xpneed;
+            if (xp >= 5 * lvlcheck)
             {
+                Xp.xpneed++;
                 lvl++;
             oops:;
                 Console.WriteLine("lvl up");
@@ -174,10 +234,11 @@ namespace goblin
 
         static void Main()
         {
-
+            Xp.xpneed = 1;
             int lvl = 5;
             int xp = 0;
             int monsters = 0;
+            Boolean area1 = true;
             Boolean special = true;
             Boolean goblin_alive = false;
             Boolean luckygoblin_alive = false;
@@ -185,6 +246,7 @@ namespace goblin
             string name = " ";
             player n = new();
             goblin nn = new();
+            world nnn = new();
             name = n.name();
 
             Console.WriteLine("hello " + name);
@@ -195,8 +257,17 @@ namespace goblin
             Console.WriteLine();
             stats = n.Stats_setup(lvl);
             int defaulthealth = stats[0];
+
+        world:;
+            while(area1 == true)
+            {
+                area1 = nnn.Area1(stats);
+            }
             goto monsters;
         goblin:;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("goblin encounter");
             int[] goblinstats = nn.Goblin();
             while (goblin_alive == true)
@@ -213,6 +284,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -234,6 +308,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -247,6 +324,9 @@ namespace goblin
             }
         luckygoblin:;
             goblinstats = nn.luckyGoblin();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("a lucky goblin showed up");
             Console.ReadLine();
             while (luckygoblin_alive == true)
@@ -263,6 +343,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         luckygoblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -284,6 +367,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         luckygoblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -298,6 +384,9 @@ namespace goblin
 
         goblinking:;
             goblinstats = nn.goblinking();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("goblin king showed up");
             Console.ReadLine();
             while (goblinking_alive == true)
@@ -314,6 +403,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         goblinking_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin king dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -335,6 +427,9 @@ namespace goblin
                     if (goblinstats[0] <= 0)
                     {
                         goblinking_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("goblin king dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
@@ -364,8 +459,10 @@ namespace goblin
                 goto goblinking;
             }
         dead:;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
             Console.WriteLine("you died");
         }
     }
 }
-
