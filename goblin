@@ -3,35 +3,42 @@ using System.Security.Cryptography.X509Certificates;
 
 namespace goblin
 {
+
+    public static class Xp
+    {
+        public static int xpneed = 1;
+    };
+
     class goblin
     {
-        public int Monsters()
+        public int Monsters(int[] stats)
         {
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
             Random rnd = new Random();
-            int rndnum = rnd.Next(1, 10+1);
+            int rndnum = rnd.Next(1, 10 + 1);
             int a = rndnum;
             return rndnum;
         }
 
         public int[] Goblin()
         {
-            int[] statsgoblin = {5, 1, 2, 1};
+            int[] statsgoblin = { 5, 1, 2, 1 };
             return statsgoblin;
         }
         public int[] luckyGoblin()
         {
-            int[] statsgoblin = {7, 1, 2, 7};
+            int[] statsgoblin = { 7, 1, 2, 7 };
             return statsgoblin;
         }
-        public int[] yourmom()
+        public int[] goblinking()
         {
-            int[] statsgoblin = {20, 3, 1, 1};
+            int[] statsgoblin = { 20, 3, 1, 1 };
             return statsgoblin;
         }
         public int[] goblindamage(int[] stats, int[] goblinstats)
         {
             Boolean crit = false;
-            for(int i = 0; i < stats[3]; i++)
+            for (int i = 0; i < stats[3]; i++)
             {
                 Random rnd = new Random();
                 int rndnum = rnd.Next(1, 20 + 1);
@@ -43,8 +50,8 @@ namespace goblin
             }
             if (crit == true)
             {
-                Console.WriteLine("you attacked and do " + stats[1]*2 + " damage");
-                goblinstats[0] = goblinstats[0] - stats[1]*2;
+                Console.WriteLine("you attacked and do " + stats[1] * 2 + " damage");
+                goblinstats[0] = goblinstats[0] - stats[1] * 2;
             }
             else
             {
@@ -66,25 +73,41 @@ namespace goblin
             special = false;
             return special;
         }
+        public int[] Resethealth(int[] stats,int defaulthealth)
+        {
+            int[] resethealth = { defaulthealth, stats[1], stats[2], stats[3] };
+            return resethealth;
+        }
 
-        public int xp(int xpstand,int xp)
+
+        public int xp(int xpstand, int xp)
         {
             xpstand = xpstand + xp;
-            if(xpstand > 20)
-            {
-                xpstand = 20;
-            }
             return xpstand;
         }
-        public int lvl(int xp, int lvl)
+        public int lvl(int xp, int lvl, int[] stats)
         {
-            if (xp == 20)
+            if (xp >= 5 * Xp.xpneed)
             {
                 lvl++;
+            oops:;
+                Console.WriteLine("lvl up");
+                Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+                string keuze = Console.ReadLine();
+                Console.Clear();
+                try
+                {
+                    stats[Int32.Parse(keuze) - 1]++;
+                }
+                catch
+                {
+                    goto oops;
+                }
+
             }
             return lvl;
         }
-        public int[] damage(int[] stats,int[] goblinstats)
+        public int[] damage(int[] stats, int[] goblinstats)
         {
             Boolean crit = false;
             for (int i = 0; i < goblinstats[3]; i++)
@@ -119,12 +142,12 @@ namespace goblin
             Console.Clear();
             return name;
         }
-        
+
         public int[] Stats_setup(int lvl)
         {
             int[] stats = { 1, 1, 1, 1 };
             Console.WriteLine(lvl + " points to spend on stats");
-            for(int i = 0; i < lvl; i++)
+            for (int i = 0; i < lvl; i++)
             {
             oops:;
                 Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
@@ -151,14 +174,14 @@ namespace goblin
 
         static void Main()
         {
-            
-            int lvl = 4;
+
+            int lvl = 5;
             int xp = 0;
             int monsters = 0;
             Boolean special = true;
             Boolean goblin_alive = false;
             Boolean luckygoblin_alive = false;
-            Boolean yourmom_alive = false;
+            Boolean goblinking_alive = false;
             string name = " ";
             player n = new();
             goblin nn = new();
@@ -170,8 +193,10 @@ namespace goblin
             n.Stats(stats);
             Console.WriteLine();
             Console.WriteLine();
+            stats = n.Stats_setup(lvl);
+            int defaulthealth = stats[0];
             goto monsters;
-            goblin:;
+        goblin:;
             Console.WriteLine("goblin encounter");
             int[] goblinstats = nn.Goblin();
             while (goblin_alive == true)
@@ -190,8 +215,10 @@ namespace goblin
                         goblin_alive = false;
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 5);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
@@ -199,7 +226,7 @@ namespace goblin
                 else
                 {
                     goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = nn.goblindamage(stats, goblinstats);
+                    stats = n.damage(stats, goblinstats);
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -209,14 +236,16 @@ namespace goblin
                         goblin_alive = false;
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 5);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
                 }
             }
-            luckygoblin:;
+        luckygoblin:;
             goblinstats = nn.luckyGoblin();
             Console.WriteLine("a lucky goblin showed up");
             Console.ReadLine();
@@ -236,8 +265,10 @@ namespace goblin
                         luckygoblin_alive = false;
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 20);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
@@ -245,7 +276,7 @@ namespace goblin
                 else
                 {
                     goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = nn.goblindamage(stats, goblinstats);
+                    stats = n.damage(stats, goblinstats);
                     if (stats[0] <= 0)
                     {
                         goto dead;
@@ -255,19 +286,21 @@ namespace goblin
                         luckygoblin_alive = false;
                         Console.WriteLine("goblin dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 20);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
                 }
             }
 
-        yourmom:;
-            goblinstats = nn.yourmom();
-            Console.WriteLine("your mom showed up");
+        goblinking:;
+            goblinstats = nn.goblinking();
+            Console.WriteLine("goblin king showed up");
             Console.ReadLine();
-            while (yourmom_alive == true)
+            while (goblinking_alive == true)
             {
                 if (goblinstats[2] > stats[2])
                 {
@@ -280,11 +313,13 @@ namespace goblin
                     }
                     if (goblinstats[0] <= 0)
                     {
-                        yourmom_alive = false;
-                        Console.WriteLine("your mom dies");
+                        goblinking_alive = false;
+                        Console.WriteLine("goblin king dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 20);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
@@ -292,27 +327,27 @@ namespace goblin
                 else
                 {
                     goblinstats = nn.goblindamage(stats, goblinstats);
-                    stats = nn.goblindamage(stats, goblinstats);
+                    stats = n.damage(stats, goblinstats);
                     if (stats[0] <= 0)
                     {
                         goto dead;
                     }
                     if (goblinstats[0] <= 0)
                     {
-                        yourmom_alive = false;
-                        Console.WriteLine("your mom dies");
+                        goblinking_alive = false;
+                        Console.WriteLine("goblin king dies");
                         Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
                         xp = n.xp(xp, 20);
-                        lvl = n.lvl(xp, lvl);
+                        lvl = n.lvl(xp, lvl, stats);
+                        defaulthealth = stats[0];
                         goto monsters;
                     }
 
                 }
             }
         monsters:;
-            lvl++;
-            stats = n.Stats_setup(lvl);
-            monsters = nn.Monsters();
+            monsters = nn.Monsters(stats);
             if (monsters >= 2)
             {
                 goblin_alive = true;
@@ -325,8 +360,8 @@ namespace goblin
             }
             if (monsters == 10)
             {
-                yourmom_alive = true;
-                goto yourmom;
+                goblinking_alive = true;
+                goto goblinking;
             }
         dead:;
             Console.WriteLine("you died");
