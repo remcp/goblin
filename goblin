@@ -229,6 +229,7 @@ namespace goblin
                     Console.WriteLine();
                     Console.WriteLine("~~~whoosh~~~ the box transforms into a treasure chest");
                     Console.WriteLine("as soon as you touch the gold it melts away. but a code reveals itself");
+                    Console.WriteLine("for some reason you get the feeling this code can be used more than once");
                     string checkbox = @"
 ************************************************************************************
                       _.==''`'=._
@@ -1577,7 +1578,7 @@ __/_  /   \ ______/ ''   /'\_,__
                 goblinking_alive = true;
                 goto goblinking;
             }
-            else if (monsters == 1)
+            else if (monsters <= 3 & explored >=2)
             {
                 luckygoblin_alive = true;
                 goto luckygoblin;
@@ -1610,6 +1611,5 @@ __/_  /   \ ______/ ''   /'\_,__
             special = true;
             goto worldkeuze;
         }
-
     }
 }
