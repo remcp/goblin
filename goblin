@@ -170,16 +170,8 @@ namespace goblin
             Console.WriteLine(room);
             Console.WriteLine();
             Console.WriteLine("all you see is a door and some boxes that look empty");
-            if (box < 5)
-            {
-                Console.WriteLine();
-                Console.WriteLine("1. leave the room.    2. check out the boxes");
-            }
-            else
-            {
-                Console.WriteLine();
-                Console.WriteLine("1. leave the room.    2. code 1221");
-            }
+            Console.WriteLine();
+            Console.WriteLine("1. leave the room.    2. check out the boxes");
             try
             {
                 keuze = Int32.Parse(Console.ReadLine());
@@ -205,10 +197,59 @@ namespace goblin
             }
             if (keuze == 2)
             {
-                box++;
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("as expected... the boxes are indeed empty...");
+                if (box < 5)
+                {
+                    box++;
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("as expected... the boxes are indeed empty...");
+                    string checkbox = @"
+                   _____________          
+                  /             \   
+                 /               \   
+                /_________________\  
+              /|\                 /|\
+             / | \               / | \
+            /  |  \_____________/  |  \
+           /   |  |             |  |   \
+           |  /|  |_____________|  |\  |
+           | / |  |             |  | \ |
+           |/  |  |_____________|  |  \|
+           |   | /               \ |   |
+           |   |/_________________\|   |
+           |  /  \                / \  | 
+           | /    \              /   \ |
+           |/      \____________/     \|
+";
+                    Console.WriteLine(checkbox);
+                }
+                else
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("~~~whoosh~~~ the box transforms into a treasure chest");
+                    Console.WriteLine("as soon as you touch the gold it melts away. but a code reveals itself");
+                    string checkbox = @"
+************************************************************************************
+                      _.==''`'=._
+                   ,_'_ ,        `'=._
+                   '=._o `'=._,       `'=._
+                        `'=._o_`'=.__       `'=._
+                        __.--,-`'=._o`'=._==_.-='''=._
+                   ._--' ,    ;      `'=._o;' ,-'''-._'.
+                   |  `'=._ ,  - 1221; , ,  `'=-._   '. ;
+                   |       `'=._;  .  ,  '  ,,    '-._; ;
+                   |        (#)  `'=._   ,  ;  ,___.--o/
+                   |        ' '       `'=.__.--',__.--o;
+                   |                     | _.--'       ;
+                   `=.o_                 |             ;
+                        `'=.o_           |             ;
+                              `'=.o_     |       _o.--'
+                                    `'=.o|o_.--''
+************************************************************************************
+";
+                    Console.WriteLine(checkbox);
+                }
             Console.ReadLine();
             Console.Clear();
             goto boxes;
@@ -938,6 +979,7 @@ __/_  /   \ ______/ ''   /'\_,__
 
         static void Main()
         {
+        newgame:;
             Console.SetWindowSize(110, 46);
             Xp.xpneed = 1;
             int worldkeuze = 9;
@@ -1535,11 +1577,6 @@ __/_  /   \ ______/ ''   /'\_,__
                 goblinking_alive = true;
                 goto goblinking;
             }
-            else if (monsters >= 2 & monsters < 10)
-            {
-                goblin_alive = true;
-                goto goblin;
-            }
             else if (monsters == 1)
             {
                 luckygoblin_alive = true;
@@ -1556,7 +1593,7 @@ __/_  /   \ ______/ ''   /'\_,__
             Console.WriteLine();
             Console.WriteLine("you died");
             Console.ReadLine();
-            Environment.Exit(0);
+            goto newgame;
         you_won:;
             Console.WriteLine();
             Console.WriteLine();
