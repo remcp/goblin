@@ -10,6 +10,8 @@ namespace goblin
         {
         newgame:;
             Console.SetWindowSize(110, 46);
+            Boolean treasurecheck = true;
+            Boolean treasure = false;
             int worldkeuze = 9;
             int explored = 0;
             int move = 0;
@@ -83,10 +85,15 @@ namespace goblin
         world:;
             while(area1 == true)
             {
-                area1 = nnn.Area1(stats);
+                area1 = nnn.Area1(stats,treasure);
                 if (explored == 0)
                 {
                     explored = 1;
+                }
+                if(treasure == true)
+                {
+                    treasure = false;
+                    lvl = n.lvls(xp, lvl, stats, 5);
                 }
             }
 
@@ -99,6 +106,11 @@ namespace goblin
                 }
                 if(area2 == 3)
                 {
+                    if(treasurecheck == true)
+                    {
+                        treasurecheck = false;
+                        treasure = true;
+                    }
                     goto getspecialblock;
                 }
             }
@@ -114,7 +126,7 @@ namespace goblin
             }
             goto monsters;
         goblin:;
-            goblin_alive = nnnn.fight_goblin(goblin_alive, player_alive, special, stats, move, specialblock, defaulthealth, lvlupcheck, lvl, xp);
+            goblin_alive = nnnn.fight_goblin(goblin_alive, player_alive, special, stats, move, specialblock);
             if (goblin_alive == true)
             {
                 goto dead;
@@ -138,8 +150,8 @@ namespace goblin
                 goto worldkeuze;
             }
         luckygoblin:;
-            luckygoblin_alive = nnnn.fight_luckygoblin(luckygoblin_alive, player_alive, special, stats, move, specialblock, defaulthealth, lvlupcheck, lvl, xp);
-            if (goblin_alive == true)
+            luckygoblin_alive = nnnn.fight_luckygoblin(luckygoblin_alive, player_alive, special, stats, move, specialblock);
+            if (luckygoblin_alive == true)
             {
                 goto dead;
             }
@@ -162,8 +174,8 @@ namespace goblin
                 goto worldkeuze;
             }
         goblinking:;
-            luckygoblin_alive = nnnn.fight_goblinking(goblinking_alive, player_alive, special, stats, move, specialblock, defaulthealth, lvlupcheck, lvl, xp);
-            if (goblin_alive == true)
+            goblinking_alive = nnnn.fight_goblinking(goblinking_alive, player_alive, special, stats, move, specialblock);
+            if (goblinking_alive == true)
             {
                 goto dead;
             }
@@ -186,8 +198,8 @@ namespace goblin
                 goto you_won;
             }
         goblinbrute:;
-            luckygoblin_alive = nnnn.fight_goblinbrute(goblinbrute_alive, player_alive, special, stats, move, specialblock, defaulthealth, lvlupcheck, lvl, xp);
-            if (goblin_alive == true)
+            goblinbrute_alive = nnnn.fight_goblinbrute(goblinbrute_alive, player_alive, special, stats, move, specialblock);
+            if (goblinbrute_alive == true)
             {
                 goto dead;
             }
@@ -196,7 +208,7 @@ namespace goblin
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("goblin dies");
+                Console.WriteLine("goblin BRUTE dies");
                 Console.ReadLine();
                 stats = n.Resethealth(stats, defaulthealth);
                 lvlupcheck = lvl;

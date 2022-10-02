@@ -9,7 +9,7 @@ namespace goblin
 {
     internal class Fight
     {
-        public Boolean fight_goblin(Boolean goblin_alive,Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock, int defaulthealth,int lvlupcheck, int lvl, int xp)
+        public Boolean fight_goblin(Boolean goblin_alive,Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock)
         {
             player n = new();
             goblin nn = new();
@@ -39,6 +39,8 @@ namespace goblin
                     }
                     else if (move == 2)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
                         if (stats[0] <= 0)
@@ -107,7 +109,7 @@ namespace goblin
             }
             return goblin_alive;
         }
-        public Boolean fight_luckygoblin(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock, int defaulthealth, int lvlupcheck, int lvl, int xp)
+        public Boolean fight_luckygoblin(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock)
         {
             player n = new();
             goblin nn = new();
@@ -137,6 +139,8 @@ namespace goblin
                     }
                     else if (move == 2)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
                         if (stats[0] <= 0)
@@ -205,7 +209,7 @@ namespace goblin
             }
             return goblin_alive;
         }
-        public Boolean fight_goblinbrute(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock, int defaulthealth, int lvlupcheck, int lvl, int xp)
+        public Boolean fight_goblinbrute(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock)
         {
             player n = new();
             goblin nn = new();
@@ -235,6 +239,8 @@ namespace goblin
                     }
                     else if (move == 2)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
                         if (stats[0] <= 0)
@@ -303,7 +309,7 @@ namespace goblin
             }
             return goblin_alive;
         }
-        public Boolean fight_goblinking(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock, int defaulthealth, int lvlupcheck, int lvl, int xp)
+        public Boolean fight_goblinking(Boolean goblin_alive, Boolean player_alive, Boolean special, int[] stats, int move, Boolean specialblock)
         {
             player n = new();
             goblin nn = new();
@@ -311,7 +317,7 @@ namespace goblin
 
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("lucky goblin encounter");
+            Console.WriteLine("Goblin King challenges you");
             string goblinart = nn.Goblinart();
             Console.ReadLine();
             Console.Clear();
@@ -333,6 +339,8 @@ namespace goblin
                     }
                     else if (move == 2)
                     {
+                        Console.WriteLine();
+                        Console.WriteLine();
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
                         if (stats[0] <= 0)

@@ -136,7 +136,7 @@ namespace goblin
             Console.Clear();
             return keuze;
         }
-        public Boolean Area1(int[] stats)
+        public Boolean Area1(int[] stats,Boolean treasure)
         {
             int box = 0;
             int keuze = 0;
@@ -227,12 +227,40 @@ namespace goblin
 ";
                     Console.WriteLine(checkbox);
                 }
-                else
+                else if (treasure == false)
                 {
                     Console.WriteLine();
                     Console.WriteLine();
                     Console.WriteLine("~~~whoosh~~~ the box transforms into a treasure chest");
                     Console.WriteLine("as soon as you touch the gold it melts away. but a code reveals itself");
+                    string checkbox = @"
+************************************************************************************
+                      _.==''`'=._
+                   ,_'_ ,        `'=._
+                   '=._o `'=._,       `'=._
+                        `'=._o_`'=.__       `'=._
+                        __.--,-`'=._o`'=._==_.-='''=._
+                   ._--' ,    ;      `'=._o;' ,-'''-._'.
+                   |  `'=._ ,  - 1221; , ,  `'=-._   '. ;
+                   |       `'=._;  .  ,  '  ,,    '-._; ;
+                   |        (#)  `'=._   ,  ;  ,___.--o/
+                   |        ' '       `'=.__.--',__.--o;
+                   |                     | _.--'       ;
+                   `=.o_                 |             ;
+                        `'=.o_           |             ;
+                              `'=.o_     |       _o.--'
+                                    `'=.o|o_.--''
+************************************************************************************
+";
+                    Console.WriteLine(checkbox);
+                }
+                else if (treasure == true)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("~~~whoosh~~~ the box transforms into a treasure chest");
+                    Console.WriteLine("as soon as you touch the gold it melts away. but a code reveals itself");
+                    Console.WriteLine("you try this code as soon as you can choose which area to go to");
                     string checkbox = @"
 ************************************************************************************
                       _.==''`'=._
