@@ -845,6 +845,20 @@ __/_  /   \ ______/ ''   /'\_,__
                             goto worldkeuze;
                         }
                         stats = n.damage(stats, goblinstats);
+                        if (goblinstats[0] <= 0)
+                        {
+                            goblinking_alive = false;
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("goblin king dies");
+                            Console.ReadLine();
+                            stats = n.Resethealth(stats, defaulthealth);
+                            xp = n.xp(xp, 20);
+                            lvl = n.lvl(xp, lvl, stats);
+                            defaulthealth = stats[0];
+                            goto worldkeuze;
+                        }
                     }
                     else if (move == 2)
                     {
@@ -923,6 +937,20 @@ __/_  /   \ ______/ ''   /'\_,__
                     else if (move == 2)
                     {
                         stats = n.Block(stats, goblinstats);
+                        if (goblinstats[0] <= 0)
+                        {
+                            goblinking_alive = false;
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("goblin king dies");
+                            Console.ReadLine();
+                            stats = n.Resethealth(stats, defaulthealth);
+                            xp = n.xp(xp, 20);
+                            lvl = n.lvl(xp, lvl, stats);
+                            defaulthealth = stats[0];
+                            goto worldkeuze;
+                        }
                     }
                     if (stats[0] <= 0)
                     {
@@ -998,6 +1026,20 @@ __/_  /   \ ______/ ''   /'\_,__
                     else if (move == 2)
                     {
                         stats = n.Block(stats, goblinstats);
+                        if (goblinstats[0] <= 0)
+                        {
+                            goblinking_alive = false;
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("goblin king dies");
+                            Console.ReadLine();
+                            stats = n.Resethealth(stats, defaulthealth);
+                            xp = n.xp(xp, 20);
+                            lvl = n.lvl(xp, lvl, stats);
+                            defaulthealth = stats[0];
+                            goto worldkeuze;
+                        }
                     }
                     if (stats[0] <= 0)
                     {
