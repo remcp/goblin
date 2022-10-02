@@ -60,20 +60,24 @@ namespace goblin
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("thats as far as you can go for now");
+                Console.WriteLine("and now we are alone in the street again");
                 Console.ReadLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("ofcourse you can always go back");
+                Console.WriteLine("we do see a church further down the road");
                 Console.ReadLine();
                 Console.WriteLine();
                 Console.WriteLine();
-                Console.WriteLine("who knows.. maybe there is something you missed");
+                Console.WriteLine("it looks like a great hideout while we figure out what is happening");
+                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("but somehow it does feel very unsafe. maybe we should make sure we explored everything before heading in");
                 Console.ReadLine();
                 Console.WriteLine();
                 Console.WriteLine();
             checkinput2:;
-                Console.WriteLine("1. go back to the room   2. go back to the street    0. fight another goblin");
+                Console.WriteLine("1. go back to the room   2. keep exploring the street    3. go to the church    0. fight another goblin");
                 try
                 {
                     keuze = Int32.Parse(Console.ReadLine());
@@ -87,6 +91,50 @@ namespace goblin
                     Console.Clear();
                     goto checkinput2;
                 }
+
+            }
+            else if (explored == 3)
+            {
+                Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("you hear a loud growl roar nearby");
+                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("while running out of the church you swear to never go back there");
+                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("but what now?");
+                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("probably best to keep training for when we come across something like that again");
+                Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine();
+            checkinput2:;
+                Console.WriteLine("1. go back to the room   2. keep exploring the street    0. fight another goblin");
+                try
+                {
+                    keuze = Int32.Parse(Console.ReadLine());
+                }
+                catch
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("at least try choosing a number");
+                    Console.ReadLine();
+                    Console.Clear();
+                    goto checkinput2;
+                }
+                if (keuze == 3)
+                {
+                    keuze = 2;
+                }
+
             }
             Console.Clear();
             return keuze;
@@ -176,11 +224,12 @@ namespace goblin
             return area1;
         }
 
-        public Boolean Area2(int[] stats)
+        public int Area2(int[] stats)
         {
             int spin = 5;
+            Boolean spins = false;
             int keuze = 0;
-            Boolean area2 = true;
+            int area2 = 1;
         checkinput:;
             Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
             Console.WriteLine();
@@ -223,6 +272,7 @@ __/_  /   \ ______/ ''   /'\_,__
             else
             {
                 Console.WriteLine("1. go explore");
+                spins = true;
             }
             try
             {
@@ -245,7 +295,7 @@ __/_  /   \ ______/ ''   /'\_,__
                 Console.WriteLine("alright its time to go exploring.. but what is that sound behind us?");
                 Console.ReadLine();
                 Console.Clear();
-                area2 = false;
+                area2 = 0;
             }
             if (keuze == 2)
             {
@@ -258,12 +308,157 @@ __/_  /   \ ______/ ''   /'\_,__
                 Console.Clear();
                 goto boxes;
             }
+            if (keuze == 1221 & spins == true)
+            {
+             area2 = 3;
+            }
 
 
             Console.Clear();
 
 
             return area2;
+        }
+
+
+        public Boolean Area3(int[] stats)
+        {
+            int spin = 5;
+            int keuze = 0;
+            Boolean area2 = true;
+            Boolean area3 = true;
+        checkinput:;
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("when looking up at the church you feel a chill down your spine");
+            Console.ReadLine();
+        boxes:;
+            Console.WriteLine();
+            Console.WriteLine("the massive church door opens slowly");
+            string street = @"
+                                 !
+                               .':'.
+                             .':::::'.
+                           .':::::::::'.
+                         .':::::::::::::'.
+                           ||    %    ||
+                           ||   .-.   ||
+                           ||  /   \  ||
+                           || /_____\ ||
+                           ||    O    ||
+                         .'||_________||'.
+                       .' .'""^""^""^""^""^""'. '.
+                     .' .'""^""^""^""^""^""^""^""'. '.
+                   .' .'""^""^""^""^""^""^""^""^""^""'. '.
+                 .'_.'""^""^""^""^""^"".""^""^""^""^""^""'._'.
+                    |===========/+\===========|________________________________________
+                    |          /-+-\          |""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^\
+                    |          |-+-|          |^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^\
+                    |          |-+-|          |""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^""^\
+                    |          |-+-|          |==========================================='
+                    |          |-.-|          |                    .'.                   |
+                    |         =.'.'.=         |            .     .'   '.     .           |
+           .'.      |        .'.'.'.'.        |           /+\  .'       '.  /+\          |
+         .'   '.    |      .'.'.' '.'.'.      |          /-+-\'._.'._.'._.'/-+-\         |
+       .'       '.  |    .'.'.'_____'.'.'.    |          |-+-| .'       '. |-+-|         |
+      '._.'._.'._.' |  .'.'_____________'.'.  |          |-+-.'           '.-+-|         |
+       .'       '.  | `| ||[][][]|[][][]|| |` |          |-+'._.'._.'._.'._.'+-|         |
+     .'           '.|  | ||      |      || |  |          |-+-.'           '.-+-|         |
+    '._.'._.'._.'._.'  | || ,;;, | .;;. || |  |          ==.'               '.==         |
+     .'           '.|  | ||;;{};;|;;{};;|| |  |           '._.'._.'._.'._.'._.'          |
+   .'               '. | ||`<><>`|`<><>`|| |  |            .'               '.           |
+  '._.'._.'._.'._.'._.'| ||  /\ [|] /\  || |  |__________.'                   '._________|
+   .'               '. | ||      |      || |  |         '._.'._.'._.'._.'._.'._.'
+ .'                   '. ||      |      || |__|                  _ -
+'lc.'._.'._.'._.'._.'._.'[]______|______[]_|_ -
+ _ -                     /_______________\   _ -   
+               _ -      /_________________\        
+                       /___________________\  _ -        _-";
+            Console.WriteLine(street);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("time to go inside");
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            string inside = @"
+        ..        ____                                               ____
+       . |       / +  \         ||                       ||         /+ . \
+      .  |       |o x.|        =**=          _          =**=        | o x|
+     .   |       |____|         ||         _( )_         ||         |____|
+    .    |                      ||        /_____\        ||
+   .     |                 ______________//|   |/__________________
+  .      |_______^________/                | + |                  /____^_____
+ .      .       _U_      /                 |___|                 //   _U_
+       .         |      /_______________________________________//     |
+      .         /|\     |______________________________________|/     /|\
+     .   (=========================)     .      . (==========================)
+    .    |                         |/|  .       . |                          |
+   .     |                         | | .        . |                          |
+  .      |_________________________|/|.         . ||------------------------||
+     (=========================)  || .          . (==========================|
+     |                         |/|  .           . |                          |
+     |                         | | .            . |                          |
+     |_________________________|/|.             . ||------------------------||
+ (=========================)  || .              . (==========================)
+ |                         |/|  .               . |                          |
+ |                         | | .                . |                          |
+ |_________________________|/|.                 . | ________________________ |
+ |                        || .                  . ||                        ||
+";
+            Console.WriteLine(inside);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("you see a big goblin standing on the platform");
+            Console.WriteLine();
+            Console.WriteLine("do we confront it, or flee");
+            Console.WriteLine();
+            Console.WriteLine("1. confront    2. flee");
+            try
+            {
+                keuze = Int32.Parse(Console.ReadLine());
+            }
+            catch
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("at least try choosing a number");
+                Console.ReadLine();
+                Console.Clear();
+                goto checkinput;
+            }
+
+            if (keuze == 1)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("we walk up to the big goblin.. and he jumps at us surprisingly fast");
+                Console.ReadLine();
+                Console.Clear();
+                area3 = false;
+            }
+            if (keuze == 2)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("we flee back to the street. we should train some more");
+                Console.ReadLine();
+                Console.WriteLine("but the goblin catches us and makes escape inpossible");
+                Console.ReadLine();
+                Console.Clear();
+                area3 = true;
+            }
+
+
+            Console.Clear();
+
+
+            return area3;
         }
 
     }
@@ -297,17 +492,22 @@ __/_  /   \ ______/ ''   /'\_,__
 
         public int[] Goblin()
         {
-            int[] statsgoblin = { 5, 1, 2, 1 };
+            int[] statsgoblin = {5, 1, 2, 1 };
             return statsgoblin;
         }
         public int[] luckyGoblin()
         {
-            int[] statsgoblin = { 7, 2, 2, 7 };
+            int[] statsgoblin = {7, 2, 2, 7 };
             return statsgoblin;
         }
         public int[] goblinking()
         {
-            int[] statsgoblin = { 20, 4, 1, 3};
+            int[] statsgoblin = {30, 4, 1, 0};
+            return statsgoblin;
+        }
+        public int[] goblinbrute()
+        {
+            int[] statsgoblin = {15, 3, 2, 0};
             return statsgoblin;
         }
         public int[] goblindamage(int[] stats, int[] goblinstats)
@@ -460,6 +660,47 @@ __/_  /   \ ______/ ''   /'\_,__
             Console.WriteLine("goblin has " + goblinstats[0] + " health");
             return stats;
         }
+
+        public int[] Specialblock(int[] stats, int[] goblinstats, Boolean specialblock)
+        {
+                specialblock = false;
+                Console.WriteLine();
+                Console.WriteLine();
+            int blockdamage = goblinstats[1] + 2;
+                Console.WriteLine("goblin attacked.. you blocked and reflect " + blockdamage + " damage");
+                goblinstats[0] = goblinstats[0] - blockdamage;
+                string attack = @"                                    
+             ///~`     |\\_              
+            ,  |='  ,))\_| ~-_       
+           / ,' ,;((((((    ~ \        
+         /' -~/~)))))))'\_   _/'          
+        (       (((((( ~-/ ~-/                 
+         ~~--|   ))''    ')  `               
+             :        (_  ~\           |`-._/\_.-`|                                   
+              \        \_   )--__  /(_/|    ||    |
+    ___       |_     \__/~-__    ~~   ,|___o()o___|
+  //~~\`\    /' ~~~----|     ~~~~~~~~' |__((<>))__|
+((()   `\`\_(_     _-~~-\              \   o\/o   /
+ )))     ~----'   /      \              \   ||   /
+  (         ;`~--'        :              \  ||  /
+            |    `\       |               '.||.'
+            |    /'`\     ;                 ``                  
+           /~   /    |    )                   
+          |    /     / | /                     
+          /   /     |  \\|                   
+        _/  /'       \  \_)                
+       ( )|'         (~-_|       
+        ) `\_         |-_;;--__ 
+        `----'       (________|\\   `";
+            Console.WriteLine(attack);
+            Console.ReadLine();
+            Console.Clear();
+            Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+            Console.WriteLine("goblin has " + goblinstats[0] + " health");
+            return stats;
+        }
+
+
         public int Move(Boolean special, int[] stats, int[] goblinstats)
         {
         keuze:;
@@ -554,29 +795,31 @@ __/_  /   \ ______/ ''   /'\_,__
             }
             return lvl;
         }
-        public int codelvl(int xp, int lvl, int[] stats)
+
+        public int lvls(int xp, int lvl, int[] stats, int lvls)
         {
             int up = 10;
-                for (int i = 0; i < 10; i++)
-                {
-                    lvl++;
-                oops:;
-                    Console.WriteLine(up + " lvls up");
+            for (int i = 0; i < lvls; i++)
+            {
+                lvl++;
+            oops:;
+                Console.WriteLine(up + " lvls up");
                 up--;
-                    Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
-                    string keuze = Console.ReadLine();
-                    Console.Clear();
-                    try
-                    {
-                        stats[Int32.Parse(keuze) - 1]++;
-                    }
-                    catch
-                    {
-                        goto oops;
-                    }
+                Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
+                string keuze = Console.ReadLine();
+                Console.Clear();
+                try
+                {
+                    stats[Int32.Parse(keuze) - 1]++;
                 }
+                catch
+                {
+                    goto oops;
+                }
+            }
             return lvl;
         }
+
         public int[] damage(int[] stats, int[] goblinstats)
         {
             Boolean crit = false;
@@ -698,7 +941,7 @@ __/_  /   \ ______/ ''   /'\_,__
 
         static void Main()
         {
-            Console.SetWindowSize(100, 40);
+            Console.SetWindowSize(110, 46);
             Xp.xpneed = 1;
             int worldkeuze = 9;
             int explored = 0;
@@ -708,11 +951,15 @@ __/_  /   \ ______/ ''   /'\_,__
             int xp = 0;
             int monsters = 0;
             Boolean area1 = true;
-            Boolean area2 = false;
-            Boolean special = true;
+            int area2 = 0;
+            Boolean area3 = false;
+            Boolean special = false;
+            Boolean specialblock = false;
+            Boolean code = true;
             Boolean goblin_alive = false;
             Boolean luckygoblin_alive = false;
             Boolean goblinking_alive = false;
+            Boolean goblinbrute_alive = false;
             string name = " ";
             player n = new();
             goblin nn = new();
@@ -733,13 +980,17 @@ __/_  /   \ ______/ ''   /'\_,__
             {
 
             }
-            else if(worldkeuze == 1)
+            else if(worldkeuze == 1 & explored >= 0)
             {
                 area1 = true;
             }
-            else if(worldkeuze == 2)
+            else if(worldkeuze == 2 & explored >= 1)
             {
-                area2 = true;
+                area2 = 1;
+            }
+            else if (worldkeuze == 3 & explored >= 2)
+            {
+                area3 = true;
             }
             else if (worldkeuze == 0)
             {
@@ -747,10 +998,18 @@ __/_  /   \ ______/ ''   /'\_,__
             }
             else if (worldkeuze == 1221)
             {
-                Console.WriteLine("the boxes were not empty after all");
-                lvl = n.codelvl(xp, lvl, stats);
-                goblinking_alive = true;
-                goto goblinking;
+                if(code == true)
+                {
+                    code = false;
+                    Console.WriteLine("the boxes were not empty after all");
+                    lvl = n.lvls(xp, lvl, stats, 10);
+                    defaulthealth = stats[0];
+                    goto monsters;
+                }
+                else
+                {
+                    Console.WriteLine("you already found the secret");
+                }
             }
         world:;
             while(area1 == true)
@@ -762,13 +1021,27 @@ __/_  /   \ ______/ ''   /'\_,__
                 }
             }
 
-            while (area2 == true)
+            while (area2 == 1)
             {
                 area2 = nnn.Area2(stats);
                 if (explored == 1)
                 {
                     explored = 2;
                 }
+                if(area2 == 3)
+                {
+                    goto getspecialblock;
+                }
+            }
+            while (area3 == true)
+            {
+                area3 = nnn.Area3(stats);
+                if (explored == 2)
+                {
+                    explored = 3;
+                }
+                goblinbrute_alive = true;
+                goto goblinbrute;
             }
             goto monsters;
         goblin:;
@@ -781,6 +1054,7 @@ __/_  /   \ ______/ ''   /'\_,__
             int[] goblinstats = nn.Goblin();
             while (goblin_alive == true)
             {
+            move:;
                 move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
@@ -797,8 +1071,25 @@ __/_  /   \ ______/ ''   /'\_,__
                     {
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
+                        if (stats[0] <= 0)
+                        {
+                            goto dead;
+                        }
                     }
-
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
                     if (goblinstats[0] <= 0)
                     {
                         goblin_alive = false;
@@ -825,44 +1116,45 @@ __/_  /   \ ______/ ''   /'\_,__
                     if (move == 1)
                     {
                         goblinstats = nn.goblindamage(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
-                        {
-                            goblin_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            lvlupcheck = lvl;
-                            xp = n.xp(xp, 5);
-                            lvl = n.lvl(xp, lvl, stats);
-                            if (lvl > lvlupcheck)
-                            {
-                                xp = 0;
-                            }
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
-                        }
+
                         stats = n.damage(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
-                        {
-                            goblinking_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin king dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            xp = n.xp(xp, 20);
-                            lvl = n.lvl(xp, lvl, stats);
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
-                        }
                     }
                     else if (move == 2)
                     {
                         stats = n.Block(stats, goblinstats);
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
+                    if (goblinstats[0] <= 0)
+                    {
+                        goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("goblin dies");
+                        Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
+                        lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
+                        defaulthealth = stats[0];
+                        goto worldkeuze;
                     }
                     if (stats[0] <= 0)
                     {
@@ -871,6 +1163,7 @@ __/_  /   \ ______/ ''   /'\_,__
 
 
                 }
+
             }
         luckygoblin:;
             goblinstats = nn.luckyGoblin();
@@ -880,6 +1173,7 @@ __/_  /   \ ______/ ''   /'\_,__
             Console.ReadLine();
             while (luckygoblin_alive == true)
             {
+            move:;
                 move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
@@ -896,18 +1190,41 @@ __/_  /   \ ______/ ''   /'\_,__
                     {
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
+                        if (stats[0] <= 0)
+                        {
+                            goto dead;
+                        }
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
                     }
                     if (goblinstats[0] <= 0)
                     {
-                        luckygoblin_alive = false;
+                        goblin_alive = false;
                         Console.WriteLine();
                         Console.WriteLine();
                         Console.WriteLine();
-                        Console.WriteLine("goblin dies");
+                        Console.WriteLine("lucky goblin dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
-                        xp = n.xp(xp, 100);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
                         lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
                         defaulthealth = stats[0];
                         goto worldkeuze;
                     }
@@ -918,39 +1235,45 @@ __/_  /   \ ______/ ''   /'\_,__
                     if (move == 1)
                     {
                         goblinstats = nn.goblindamage(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
-                        {
-                            luckygoblin_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            xp = n.xp(xp, 20);
-                            lvl = n.lvl(xp, lvl, stats);
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
-                        }
+
                         stats = n.damage(stats, goblinstats);
                     }
                     else if (move == 2)
                     {
                         stats = n.Block(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
                         {
-                            goblinking_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin king dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            xp = n.xp(xp, 20);
-                            lvl = n.lvl(xp, lvl, stats);
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
                         }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
+                    if (goblinstats[0] <= 0)
+                    {
+                        goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("lucky goblin dies");
+                        Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
+                        lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
+                        defaulthealth = stats[0];
+                        goto worldkeuze;
                     }
                     if (stats[0] <= 0)
                     {
@@ -969,6 +1292,7 @@ __/_  /   \ ______/ ''   /'\_,__
             Console.ReadLine();
             while (goblinking_alive == true)
             {
+            move:;
                 move = n.Move(special, stats, goblinstats);
                 if (goblinstats[2] > stats[2])
                 {
@@ -985,20 +1309,43 @@ __/_  /   \ ______/ ''   /'\_,__
                     {
                         Console.WriteLine("you blocked too slow..");
                         stats = n.damage(stats, goblinstats);
+                        if (stats[0] <= 0)
+                        {
+                            goto dead;
+                        }
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
                     }
                     if (goblinstats[0] <= 0)
                     {
-                        goblinking_alive = false;
+                        goblin_alive = false;
                         Console.WriteLine();
                         Console.WriteLine();
                         Console.WriteLine();
                         Console.WriteLine("goblin king dies");
                         Console.ReadLine();
                         stats = n.Resethealth(stats, defaulthealth);
-                        xp = n.xp(xp, 20);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
                         lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
                         defaulthealth = stats[0];
-                        goto you_won;
+                        goto worldkeuze;
                     }
 
                 }
@@ -1007,39 +1354,45 @@ __/_  /   \ ______/ ''   /'\_,__
                     if (move == 1)
                     {
                         goblinstats = nn.goblindamage(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
-                        {
-                            goblinking_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin king dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            xp = n.xp(xp, 20);
-                            lvl = n.lvl(xp, lvl, stats);
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
-                        }
+
                         stats = n.damage(stats, goblinstats);
                     }
                     else if (move == 2)
                     {
                         stats = n.Block(stats, goblinstats);
-                        if (goblinstats[0] <= 0)
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
                         {
-                            goblinking_alive = false;
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("goblin king dies");
-                            Console.ReadLine();
-                            stats = n.Resethealth(stats, defaulthealth);
-                            xp = n.xp(xp, 20);
-                            lvl = n.lvl(xp, lvl, stats);
-                            defaulthealth = stats[0];
-                            goto worldkeuze;
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
                         }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
+                    if (goblinstats[0] <= 0)
+                    {
+                        goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("goblin king dies");
+                        Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
+                        lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
+                        defaulthealth = stats[0];
+                        goto worldkeuze;
                     }
                     if (stats[0] <= 0)
                     {
@@ -1049,22 +1402,151 @@ __/_  /   \ ______/ ''   /'\_,__
 
                 }
             }
+        goblinbrute:;
+            if (special == true)
+            {
+                specialblock = true;
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Goblin Brute");
+            goblinart = nn.Goblinart();
+            Console.ReadLine();
+            Console.Clear();
+            goblinstats = nn.goblinbrute();
+            while (goblinbrute_alive == true)
+            {
+            move:;
+                move = n.Move(special, stats, goblinstats);
+                if (goblinstats[2] > stats[2])
+                {
+                    if (move == 1)
+                    {
+                        stats = n.damage(stats, goblinstats);
+                        if (stats[0] <= 0)
+                        {
+                            goto dead;
+                        }
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        Console.WriteLine("you blocked too slow..");
+                        stats = n.damage(stats, goblinstats);
+                        if (stats[0] <= 0)
+                        {
+                            goto dead;
+                        }
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
+                    if (goblinstats[0] <= 0)
+                    {
+                        goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("goblin brute dies");
+                        Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
+                        lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
+                        defaulthealth = stats[0];
+                        goto worldkeuze;
+                    }
+
+                }
+                else
+                {
+                    if (move == 1)
+                    {
+                        goblinstats = nn.goblindamage(stats, goblinstats);
+
+                        stats = n.damage(stats, goblinstats);
+                    }
+                    else if (move == 2)
+                    {
+                        stats = n.Block(stats, goblinstats);
+                    }
+                    else if (move == 3 & special == true)
+                    {
+                        if (specialblock == true)
+                        {
+                            Console.WriteLine("special");
+                            stats = n.Specialblock(stats, goblinstats, specialblock);
+                            specialblock = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("you already used the special");
+                            goto move;
+                        }
+                    }
+                    if (goblinstats[0] <= 0)
+                    {
+                        goblin_alive = false;
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("goblin brute dies");
+                        Console.ReadLine();
+                        stats = n.Resethealth(stats, defaulthealth);
+                        lvlupcheck = lvl;
+                        xp = n.xp(xp, 5);
+                        lvl = n.lvl(xp, lvl, stats);
+                        if (lvl > lvlupcheck)
+                        {
+                            xp = 0;
+                        }
+                        defaulthealth = stats[0];
+                        goto worldkeuze;
+                    }
+                    if (stats[0] <= 0)
+                    {
+                        goto dead;
+                    }
+
+
+                }
+            }
+
         monsters:;
+            if (special == true)
+            {
+                specialblock = true;
+            }
             monsters = nn.Monsters(stats);
-            if (monsters >= 2 & monsters < 10)
+            if (monsters >= 7 & explored >= 3)
+            {
+                goblinking_alive = true;
+                goto goblinking;
+            }
+            else if (monsters >= 2 & monsters < 10)
             {
                 goblin_alive = true;
                 goto goblin;
             }
-            if (monsters == 1)
+            else if (monsters == 1)
             {
                 luckygoblin_alive = true;
                 goto luckygoblin;
-            }
-            if (monsters == 10 & explored >= 2)
-            {
-                goblinking_alive = true;
-                goto goblinking;
             }
             else
             {
@@ -1085,6 +1567,14 @@ __/_  /   \ ______/ ''   /'\_,__
             Console.WriteLine("you won!!");
             Console.ReadLine();
             Environment.Exit(0);
+        getspecialblock:;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("unlocked special block");
+            Console.ReadLine();
+            special = true;
+            goto worldkeuze;
         }
 
     }
