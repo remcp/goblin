@@ -318,7 +318,7 @@ namespace goblin
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("Goblin King challenges you");
-            string goblinart = nn.Goblinart();
+            string goblinart = nn.Goblinkingart();
             Console.ReadLine();
             Console.Clear();
             int[] goblinstats = nn.goblinking();

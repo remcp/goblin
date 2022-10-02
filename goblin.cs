@@ -25,6 +25,34 @@ namespace goblin
             Console.WriteLine(goblinart);
             return goblinart;
         }
+
+        public string Goblinkingart()
+        {
+            string goblinart = @"  
+                  /\     /\
+              __,/='\```/'=\__
+              '//  (o) \(o) \ `'         _,-,
+              //|     ,_)   (`\      ,-'`_,-\
+            ,-~~~\  `'==='  /-,      \==```` \__
+           /        `----'     `\     \       \/
+        ,-`                  ,   \  ,.-\       \
+       /      ,               \,-`\`_,-`\_,..--'\
+      ,`    ,/,              ,>,   )     \--`````\
+      (      `\`---'`  `-,-'`_,<   \      \_,.--'`
+       `.      `--. _,-'`_,-`  |    \
+        [`-.___   <`_,-'`------(    /
+        (`` _,-\   \ --`````````|--`
+         >-`_,-`\,-` ,          |
+       <`_,'     ,  /\          /
+        `  \/\,-/ `/  \/`\_/V\_/
+           (  ._. )    ( .__. )
+           |      |    |      |
+            \,---_|    |_---./
+            ooOO(_)    (_)OOoo";
+            Console.WriteLine(goblinart);
+            return goblinart;
+        }
+
         public int Monsters(int[] stats)
         {
             Console.WriteLine("health " + stats[0] + ", damage " + stats[1] + ", speed " + stats[2] + ", luck " + stats[3]);
