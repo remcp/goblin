@@ -185,7 +185,14 @@ namespace goblin
                 Console.Clear();
                 goto checkinput;
             }
-
+            if (keuze == 1221)
+            {
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("nope");
+                Console.ReadLine();
+                Console.Clear();
+            }
             if (keuze == 1)
             {
                 Console.WriteLine();
@@ -229,7 +236,6 @@ namespace goblin
                     Console.WriteLine();
                     Console.WriteLine("~~~whoosh~~~ the box transforms into a treasure chest");
                     Console.WriteLine("as soon as you touch the gold it melts away. but a code reveals itself");
-                    Console.WriteLine("for some reason you get the feeling this code can be used more than once");
                     string checkbox = @"
 ************************************************************************************
                       _.==''`'=._
@@ -310,8 +316,8 @@ __/_  /   \ ______/ ''   /'\_,__
             }
             else
             {
-                Console.WriteLine("1. go explore");
                 spins = true;
+                goto spins;
             }
             try
             {
@@ -347,7 +353,8 @@ __/_  /   \ ______/ ''   /'\_,__
                 Console.Clear();
                 goto boxes;
             }
-            if (keuze == 1221 & spins == true)
+        spins:;
+            if (spins == true)
             {
              area2 = 3;
             }
