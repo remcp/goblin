@@ -329,10 +329,10 @@ __/_  /   \ ______/ ''   /'\_,__
                 Console.WriteLine();
                 Console.WriteLine("you attack and do " + stats[1] * 2 + " damage");
                 goblinstats[0] = goblinstats[0] - stats[1] * 2;
-                string attack = @"
-                                      /|
-                                     |\|
-                                     |||
+                string attack = @"  * ** *
+                                   ***/|***
+                                   **|\|**
+                                    *|||*
                                      |||
              ///~`     |\\_          |||         =\\\\         . .
             ,  |='  ,))\_| ~-_       |||          _)  \      _/_/|
@@ -596,11 +596,11 @@ __/_  /   \ ______/ ''   /'\_,__
                 Console.WriteLine("goblin attacks and does " + goblinstats[1] * 2 + " damage");
                 stats[0] = stats[0] - goblinstats[1] * 2;
                 string attack = @"     
-                                 _________                               
-             ///~`     |\\_     /         \______=\\\\____|   . .
-            ,  |='  ,))\_| ~-_  |          ________)  \___| _/_/|
-           / ,' ,;((((((    * \  \________/      `~~~\-~-_|/~ (_/\
-         /' -~/~)))))))'\_   _/'                      \_  /'  D   |
+                                *_________                                
+             ///~`     |\\_    */         \______=\\\\____|   . .
+            ,  |='  ,))\_| ~-_ *|          ________)  \___| _/_/|
+           / ,' ,;((((((    * \ *\________/ *    `~~~\-~-_|/~ (_/\
+         /' -~/~)))))))'\_   _/' *  *  *  *           \_  /'  D   |
         (       (((((( ~-/ ~-/                          ~-;  /    \--_
          ~~--|   ))''    ')  `                            `~~\_    \   )
              :        (_  ~\                        ,       /~~-     ./
@@ -824,7 +824,7 @@ __/_  /   \ ______/ ''   /'\_,__
                 {
                     if (move == 1)
                     {
-                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
                         if (goblinstats[0] <= 0)
                         {
                             goblin_alive = false;
@@ -844,7 +844,7 @@ __/_  /   \ ______/ ''   /'\_,__
                             defaulthealth = stats[0];
                             goto worldkeuze;
                         }
-                        goblinstats = nn.goblindamage(stats, goblinstats);
+                        stats = n.damage(stats, goblinstats);
                     }
                     else if (move == 2)
                     {
@@ -903,7 +903,7 @@ __/_  /   \ ______/ ''   /'\_,__
                 {
                     if (move == 1)
                     {
-                        stats = n.damage(stats, goblinstats);
+                        goblinstats = nn.goblindamage(stats, goblinstats);
                         if (goblinstats[0] <= 0)
                         {
                             luckygoblin_alive = false;
@@ -918,7 +918,7 @@ __/_  /   \ ______/ ''   /'\_,__
                             defaulthealth = stats[0];
                             goto worldkeuze;
                         }
-                        goblinstats = nn.goblindamage(stats, goblinstats);
+                        stats = n.damage(stats, goblinstats);
                     }
                     else if (move == 2)
                     {
